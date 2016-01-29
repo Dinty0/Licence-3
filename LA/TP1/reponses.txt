@@ -1,0 +1,44 @@
+Exo 1
+wc:				// 166035	 
+gedit: 181517			// 177229
+open office: 165975		// 166035
+java: 166687			
+c++:165975			// 166035
+
+
+
+
+1/ grep '\<[Pp][[:alpha:]]*e\>' -o germinal.txt 
+
+
+2/ grep '[0123456789]*' -o germinal.txt 
+
+3/ grep '[Rr]egard[[:alpha:]]+' -o germinal.txt
+
+4/ grep '\<[A-Z][[:alpha:]]*' -o germinal.txt
+
+5/ grep '[[:alpha:]]*tt[[:alpha:]]*' -o germinal.txt
+
+6/ grep -Eon '[[:alnum:]]{10,20}' -i germinal.txt
+
+7/ grep -E '.{21}/<est/>.{21}' -o germinal.txt
+
+
+
+
+AVEC GREP
+
+1/ grep '\<[0123456789]*[13579]\>' -o germinal.txt
+
+2/ non
+
+3/ non
+
+AVEC LIBREOFFICE
+
+1/ [0-9]*[13579]\>
+
+2/ non
+
+3/ non
+

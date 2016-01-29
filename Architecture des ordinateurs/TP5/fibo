@@ -1,0 +1,76 @@
+	.data
+
+question:	.asciiz "Number ? " 
+answer:		.asciiz "Résultat: "
+
+	.text
+	.globl __start
+
+__start:
+	jal main		# call main
+	li $v0, 10		# end of programm
+	syscall
+	
+main:
+	sub $sp, $sp, 24	# allocation of the space required for main
+	sw $ra, 16($sp)		# stock of the adress of return
+	
+	
+	li $v0, 4		# display of the question (4 for character chain)
+	la $a0, question	# load of the question to display
+	syscall			# display
+		
+	li $v0, 5		# input of the user (5 for integer inputs)
+	syscall			
+	
+	move $a0, $v0		# load of the value chosen by the user in $a0
+	
+	jal fibo		# call fibo
+	move $t0, $v0		# copy the result of fibo in $t0
+						
+	li $v0, 4		# display of a character chain
+	la $a0, answer		# load of the character chain to display
+	syscall			# display
+	
+	li $v0, 1		# display of an integer
+	la $a0, ($t0)		# load of the integer to display
+	syscall			# diplay
+	
+	li $v0, 10		# end of programm
+	syscall
+	
+	lw $ra, 16($sp)		# load of the inital value of $ra in $ra
+	add $sp, $sp, 24	# liberation of the space used by main
+	jr $ra			# jump from $ra
+
+fibo:
+	sub $sp, $sp, 24	# allocation of the space required for fibo
+	sw $ra, 16($sp)		# stock of the adress of return
+	sw $s0, 20($sp)		# stock of the the temporary register
+	sw $a0, 24($sp)		# stock of the argument of fibo
+	
+if1: 	bnez $a0, else1		# if $a0 != 0, jump to else1
+then1:	li $v0, 0			# load 0 in the register of return
+	b endif1			# jump to endif1
+else1:				# else
+if2:	bne $a0, 1, else2		# if $a1 != 1, jump to else2
+then2:	li $v0, 1				# load 1 in the register of return
+	b endif2				# jump to endif2
+else2:					# else
+	lw $s0, 24($sp) 			# load in the temporary register the value of $a0
+	sub $a0, $a0, 1				# substract 1 to $a0
+	jal fibo				# call fibo with the new value of $a0
+	
+	move $s0, $v0				# copy the value of $v0 in $s0
+	lw $a0, 24($sp)				# load the value of the temporary register in $a0
+	sub $a0, $a0, 2				# substract 2 to $a0
+	jal fibo				# call fibo with the new value of $a
+
+	add $v0, $s0, $v0			# add in $v0 the value of $s0 (the result of the 2nd call to fibo) and $v0 (the result of the 1st call to fibo)
+endif2:					# endif2
+endif1:				# endif1
+	lw $s0, 20($sp)		# load of the inital value of $s0 in $s0	
+	lw $ra, 16($sp)		# load of the initial value of $ra in $ra
+	lw $a0, 24($sp)		# load of the initial value of $a0 in $a0
+	add $sp, $sp, 24	# liberation of the space used by fibo
+	jr $ra			# jump from $ra

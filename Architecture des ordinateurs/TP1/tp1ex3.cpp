@@ -1,0 +1,131 @@
+/*
+	TP1 : Architecture des ordinateurs
+	Exercice 3.
+
+*/
+
+using namespace std;
+#include <iostream>
+#include <algorithm>
+#include <iterator>
+#include <vector>
+#include <math.h>
+
+/*
+  S = \sum T = 2.6
+*/
+const vector<double> T = 
+  { 9007199254740992.0, 999999999999.9, -999999999998.9, 3.56, 12.8766, 
+    0.0123, 999394.4453, 1265356.434536, 23.53, 7889.123, 0.00002145, 0.5, 
+    0.06456, 1254534536.4574, -1254534536.4575, -9007199254740992.0, 
+    -999999999999.9, 999999999998.9, -3.56, -12.8766, -0.0123, 
+    -999394.4453, -1265356.434536, -23.53, -7889.123, -0.00002145, 
+    -0.5, -0.06456, -1254534536.4574, 1254534536.4575, 2.6 };
+
+bool croissant(double a, double b)
+{
+  return a < b;
+}
+
+bool decroissant(double a, double b)
+{
+  return a > b;
+}
+
+bool abs_croissant(double a, double b)
+{
+	return fabs(a) < fabs(b);
+}
+
+bool abs_decroissant(double a, double b)
+{
+	return fabs(a) > fabs(b);
+}
+
+//------------------------------------------------------------------------------
+double somme_recursive(const vector<double>& T)
+{
+	double somme = 0;
+
+	for (int i=0; i<T.size(); ++i)
+	{
+		somme = somme + T.at(i);
+	}
+	
+	return somme;
+}
+
+double somme_croissante(const vector<double> T)
+{
+	vector<double> Tc(T);
+	sort(Tc.begin(), Tc.end(), croissant);
+	
+	return somme_recursive(Tc);
+}
+
+double somme_decroissante(const vector<double> T)
+{
+	vector<double> Td(T);
+	sort(Td.begin(), Td.end(), decroissant);
+
+	return somme_recursive(Td);
+}
+
+double somme_abs_croissante(const vector<double> T)
+{
+	vector<double> Tac(T);
+	sort(Tac.begin(), Tac.end(), abs_croissant);
+
+	return somme_recursive(Tac);
+}
+
+double somme_abs_decroissante(const vector<double> T)
+{
+	vector<double> Tad(T);
+	sort(Tad.begin(), Tad.end(), abs_decroissant);
+
+	return somme_recursive(Tad);
+}
+
+int main ()
+{
+	/*
+		Test fonction sort avec abs_croissant et abs_decroissant
+			---> Fonctionne
+	
+
+	const vector<double> T = {1,22.1,-3,4.5,7.8};
+	
+	vector<double> Tc(T);
+	vector<double> Td(T);
+	
+	sort(Tc.begin(), Tc.end(), abs_croissant);
+	copy(Tc.begin(), Tc.end(), ostream_iterator<double>(cout, " "));
+	cout << endl;
+	sort(Td.begin(), Td.end(), abs_decroissant);
+	copy(Td.begin(), Td.end(), ostream_iterator<double>(cout, " "));
+	cout << endl;
+	*/
+
+	cout << "somme_recursive : " << somme_recursive(T) << " ." << endl;
+	cout << "somme_croissante : " << somme_croissante(T) << " ." << endl;
+	cout << "somme_decroissante : " << somme_decroissante(T) << " ." << endl;
+	cout << "somme_abs_croissante : " << somme_abs_croissante(T) << " ." << endl;
+	cout << "somme_abs_decroissante : " << somme_abs_decroissante(T) << " ." << endl;
+
+	return 0;
+}
+
+/*
+	Jeux de test :
+
+	E126956W@I019V7pc15:~/Semestre5/Architecture des ordinateurs$ ./tp1ex3.exe
+
+	somme_recursive : 3.05378 .
+	somme_croissante : 2 .
+	somme_decroissante : 2 .
+	somme_abs_croissante : 3 .
+	somme_abs_decroissante : 2.6 .
+*/
+
+

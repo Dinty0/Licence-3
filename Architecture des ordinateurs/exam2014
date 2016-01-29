@@ -1,0 +1,51 @@
+	.data
+
+tab:	.word
+szT:	.word 100
+
+	.text
+	.globl __start
+
+__start:
+	jal main		# call main
+	li $v0, 10		# end of programm
+	syscall
+
+main:
+	lw $a0, tab
+	lw $a1, szT
+	jal isqrt_table
+	
+	lw $t0, tab
+	
+	li $v0, 1		# display of the question (4 for character chain)
+	lw $a0, ($t0)		# load of the question to display
+	syscall			# display
+
+isqrt:
+	move $v0, $a0
+	jr $ra
+
+
+isqrt_table:
+	sub $sp, $sp, 24
+	sw $ra, 16($sp)
+	sw $a0, 20($sp)
+	sw $a1, 24($sp)
+	
+	li $t0, 0
+	
+	for: bge $t0, $a1, endfor
+		move $a0,$t0
+		jal isqrt
+		sw $v0, ($a0)
+		add $a0, $a0, 4
+		add $t0, $t0, 1
+		b for
+	endfor:
+				
+	lw $ra, 16($sp)		
+	lw $a0, 20($sp)		
+	lw $a1, 24($sp)
+	add $sp, $sp, 24	
+	jr $ra

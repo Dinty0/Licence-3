@@ -1,0 +1,48 @@
+Architecture TP2 : Circuits combinatoires
+
+Exercice 1 : Simulation d'un circuit
+
+(cf fichier logisim)
+
+3)  A | B | S
+ 
+	0 | 0 | 0
+	0 | 1 | 1
+	1 | 0 | 0
+	1 | 1 | 0
+
+S = non(non(B) v A)
+	!(!B || A)
+
+Exercice 2 : Conception d'un circuit
+
+(cf fichier logisim)
+
+1) add1 (input A, input B) : output S, output Rs
+
+Table de vérité : 
+
+	A | B | S | Rs
+
+	0 | 0 | 0 | 0
+	0 | 1 | 1 | 0
+	1 | 0 | 1 | 0
+	1 | 1 | 0 | 1
+
+3) add1r (input A, input B, input Re) : output S, output Rs
+
+Table de vérité : 
+
+	A | B | Re | S | Rs
+
+	0 | 0 | 0  | 0 | 0
+	0 | 0 | 1  | 1 | 0
+	0 | 1 | 0  | 1 | 0
+	0 | 1 | 1  | 0 | 1
+	1 | 0 | 0  | 1 | 0
+	1 | 0 | 1  | 0 | 1
+	1 | 1 | 0  | 0 | 1
+	1 | 1 | 1  | 1 | 1
+
+
+

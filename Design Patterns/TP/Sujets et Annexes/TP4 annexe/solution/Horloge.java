@@ -1,0 +1,1 @@
+class Horloge extends Sujet { }

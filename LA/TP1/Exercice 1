@@ -1,0 +1,17 @@
+Exercice 1.1:
+
+1) 
+E115957Q@I012V7pc04:~/Documents/L3/LA$ wc -w nomfic.txt
+165975 nomfic.txt
+
+2)
+177171
+
+3)
+165975
+
+4)
+E115957Q@I012V7pc04:~/Documents/L3/LA$ ./q4.exe
+On entre dans le fichier
+Il y a : 165975 mots.
+

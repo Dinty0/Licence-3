@@ -1,0 +1,19 @@
+Exercice 1.2:
+
+I) Utilisation de grep
+
+1) grep -Eo '[p,P][a-z]*e' nomfic.txt
+2) grep -Eo '[0-9]*' nomfic.txt
+3) grep -Eo 'regard[a-r;t-z]+' nomfic.txt
+4) grep -Eo '[A-Z][a-z]*' nomfic.txt
+5) grep -Eo '[a-z;A-Z]*tt[a-z]*' nomfic.txt
+6) grep -Eo '[A-Z;a-z]{10,20}' nomfic.txt
+7) grep -Eo '.{21}\best(\s|,|;).{21}' nomfic.txt
+
+Entiers impairs :  grep -Eo '[0-9]*(1|3|5|7|9)' nomfic.txt
+Formes bien parenthésées : On peut pas
+Les suites de nombres croissant : On peut pas
+
+II) Utilisation de LibreOffice
+
+1)
